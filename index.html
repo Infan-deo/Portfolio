@@ -329,6 +329,15 @@
       font-size: 7px;
     }
 
+    /* Bombtag media */
+    .bombtag-screen img,
+    .bombtag-screen video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     /* ── DIVIDERS ── */
     .section-divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0 0; }
 
@@ -363,6 +372,46 @@ document.addEventListener('DOMContentLoaded', function () {
   const monitorScreen = document.getElementById('monitorScreen');
 
   if (!monitorScreen) return;
+
+  const bombtagScreen = document.getElementById('bombtagScreen');
+  const bombtag = document.getElementById('bombtag');
+
+  if (bombtagScreen && bombtag) {
+    const bombtagThumbs = bombtag.querySelectorAll('.thumb');
+
+    bombtagThumbs.forEach(function (thumb) {
+      thumb.addEventListener('click', function () {
+        const image = this.getAttribute('data-image');
+        const video = this.getAttribute('data-video');
+        const title = this.getAttribute('data-title') || 'Bombtag media';
+
+        bombtagScreen.style.opacity = '0';
+
+        setTimeout(function () {
+          if (image) {
+            bombtagScreen.innerHTML = `
+              <img
+                src="${image}"
+                alt="${title}"
+              >
+            `;
+          } else if (video) {
+            bombtagScreen.innerHTML = `
+              <video
+                src="${video}"
+                controls
+                autoplay
+                muted
+                playsinline
+              ></video>
+            `;
+          }
+
+          bombtagScreen.style.opacity = '1';
+        }, 200);
+      });
+    });
+  }
 
   // Only target the Grid Tactics thumbnails.
   const gridTactics = document.getElementById('grid-tactics');
@@ -429,7 +478,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <div class="hero">
   <div class="hero-watermark">PORTFOLIO</div>
   <div class="hero-inner">
-    <div class="hero-eyebrow">Infan Deol · Unity Game Developer · 2 years Experience · 22 Years Old</div>
+    <div class="hero-eyebrow">Infan Deol · Unity Game Developer · 2 Years · 22 Years Old</div>
     <h1>Games I've<br><em>built</em> & shipped.</h1>
     <p class="hero-sub">A curated showcase of personal projects I own end-to-end, and professional titles I contributed to — with clear distinction between what I built and what I contributed to.</p>
   </div>
@@ -448,7 +497,7 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
     </div>
     <div class="section-rule"></div>
-    <div class="section-count">1 TITLE</div>
+    <div class="section-count">2 TITLES</div>
   </div>
 
   <!-- ── GRID TACTICS ── -->
@@ -587,7 +636,136 @@ document.addEventListener('DOMContentLoaded', function () {
   </div>
 </div>
 
-<!-- ════════════════════
+<!-- ── BOMBTAG ── -->
+  <div class="project-block personal-block flipped" id="bombtag">
+
+    <div class="proj-info">
+      <div class="proj-meta">
+        <span class="proj-badge badge-solo"><span class="badge-dot"></span>Solo Project</span>
+        <span class="proj-badge badge-play"><span class="badge-dot"></span>Completed</span>
+        <span class="proj-num">PERSONAL · 02</span>
+      </div>
+
+      <div class="proj-title">Bombtag</div>
+      <p class="proj-tagline">A solo-built multiplayer party game where players pass a live bomb to another player before the timer runs out. Built from scratch with FishNet networking and deployed on Linux dedicated servers through Edgegap.</p>
+
+      <div class="contrib-title" style="color:var(--violet);">What I built</div>
+      <ul class="feat-list">
+        <li>Client-side prediction for responsive player movement with server reconciliation</li>
+        <li>Create and join room system for multiplayer matches</li>
+        <li>Steam integration using Facepunch Steamworks to identify players by their Steam profile and display Steam names</li>
+        <li>Steam profile data synchronization across multiplayer clients</li>
+        <li>Server-authoritative gameplay running on a dedicated Linux server</li>
+        <li>Multi-room multiplayer architecture for running separate matches concurrently</li>
+        <li>Core Bombtag gameplay loop — passing the bomb before the timer expires</li>
+      </ul>
+
+      <div class="proj-tags">
+        <span class="tag">Unity</span><span class="tag">C#</span>
+        <span class="tag">FishNet</span><span class="tag">Multiplayer</span>
+        <span class="tag">Client Prediction</span><span class="tag">Server Reconciliation</span>
+        <span class="tag">Facepunch Steamworks</span><span class="tag">Steam Integration</span>
+        <span class="tag">Steam Profile Sync</span><span class="tag">Dedicated Server</span>
+        <span class="tag">Linux</span><span class="tag">Edgegap</span><span class="tag">Multi-Room</span>
+      </div>
+
+      <div class="proj-links">
+        <a href="https://github.com/Infan-deo/Multiroom-Multiplayer" target="_blank" rel="noopener" class="proj-link link-violet">⌘ View on GitHub →</a>
+        <a href="https://edgegap.com" target="_blank" rel="noopener" class="proj-link link-ghost-v">Edgegap Hosting →</a>
+      </div>
+    </div>
+
+    <!-- MEDIA -->
+    <div class="proj-media" style="background:#090B14;">
+      <div class="blob" style="width:280px;height:280px;background:#FF8C00;opacity:0.08;top:-60px;right:-60px;"></div>
+      <div class="blob" style="width:200px;height:200px;background:#00E5C0;opacity:0.05;bottom:30px;left:10px;"></div>
+
+      <div class="media-main">
+        <div class="monitor-wrap">
+          <div class="monitor">
+            <div class="monitor-bar">
+              <div class="mdot" style="background:#FF5F57;"></div>
+              <div class="mdot" style="background:#FEBC2E;"></div>
+              <div class="mdot" style="background:#28C840;"></div>
+              <div style="flex:1;text-align:center;font-family:var(--mono);font-size:7px;color:rgba(255,255,255,0.5);letter-spacing:.08em;">
+                BOMBTAG · MULTIPLAYER MATCH
+              </div>
+            </div>
+
+            <div class="monitor-screen bombtag-screen" id="bombtagScreen">
+              <img
+                src="images/bombtag-01.png"
+                alt="Bombtag gameplay screenshot"
+                style="display:block;width:100%;height:100%;object-fit:cover;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="thumb-strip">
+
+        <div class="thumb"
+             data-image="images/bombtag-01.png"
+             data-type="Screenshot"
+             data-title="BOMBTAG GAMEPLAY"
+             style="background:linear-gradient(135deg,#0E0A1A,#080814);">
+          <img src="images/bombtag-01.png" alt="Bombtag gameplay screenshot" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.7;">
+          <div class="thumb-icon">📸</div>
+          <div class="thumb-type">Screenshot</div>
+          <div class="thumb-label">GAMEPLAY</div>
+        </div>
+
+        <div class="thumb"
+             data-image="images/bombtag-02.png"
+             data-type="Screenshot"
+             data-title="BOMBTAG ROOM LOBBY"
+             style="background:linear-gradient(135deg,#0A1018,#080814);">
+          <img src="images/bombtag-02.png" alt="Bombtag room lobby screenshot" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.7;">
+          <div class="thumb-icon">📸</div>
+          <div class="thumb-type">Screenshot</div>
+          <div class="thumb-label">ROOM LOBBY</div>
+        </div>
+
+        <div class="thumb"
+             data-image="images/bombtag-03.png"
+             data-type="Screenshot"
+             data-title="BOMBTAG MULTIPLAYER"
+             style="background:linear-gradient(135deg,#0A0818,#080814);">
+          <img src="images/bombtag-03.png" alt="Bombtag multiplayer screenshot" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.7;">
+          <div class="thumb-icon">📸</div>
+          <div class="thumb-type">Screenshot</div>
+          <div class="thumb-label">MULTIPLAYER</div>
+        </div>
+
+        <div class="thumb"
+             data-image="images/bombtag-04.png"
+             data-type="Screenshot"
+             data-title="BOMBTAG DEDICATED SERVER"
+             style="background:linear-gradient(135deg,#08100E,#080814);">
+          <img src="images/bombtag-04.png" alt="Bombtag dedicated server screenshot" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.7;">
+          <div class="thumb-icon">📸</div>
+          <div class="thumb-type">Screenshot</div>
+          <div class="thumb-label">SERVER</div>
+        </div>
+
+        <div class="thumb"
+             data-video="videos/bombtag-gameplay.mp4"
+             data-type="Gameplay"
+             data-title="BOMBTAG GAMEPLAY VIDEO"
+             style="background:linear-gradient(135deg,#0A0818,#080814);">
+          <div class="thumb-play">
+            <div class="play-ring">▶</div>
+          </div>
+          <div class="thumb-icon" style="opacity:0.15;">🎬</div>
+          <div class="thumb-type">Gameplay</div>
+          <div class="thumb-label">VIDEO</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════
      💼 PROFESSIONAL PROJECTS
 ════════════════════ -->
 <hr class="section-divider"/>
