@@ -358,7 +358,10 @@
       .proj-info { border-right: none !important; border-left: none !important; border-bottom: 1px solid var(--border); }
       .proj-media { min-height: 340px; }
       nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
+      .nav-links { display: flex; gap: 0.45rem; }
+      .nav-links .nav-pill { display: none; }
+      .nav-cta { display: inline-flex; align-items: center; justify-content: center; padding: 0.5rem 0.8rem; }
+      .nav-github { display: inline-flex; align-items: center; justify-content: center; }
       .hero { padding: 6rem 1.5rem 3rem; }
       .section-header { padding: 2rem 1.5rem 0; }
       .proj-info { padding: 2rem 1.5rem; }
@@ -470,6 +473,7 @@ document.addEventListener('DOMContentLoaded', function () {
   <div class="nav-links">
     <a href="#personal" class="nav-pill active-personal">🛠 Personal</a>
     <a href="#professional" class="nav-pill active-pro">💼 Professional</a>
+    <a href="https://github.com/Infan-deo?tab=repositories" target="_blank" rel="noopener" class="nav-cta nav-github">GitHub ↗</a>
     <a href="https://mail.google.com/mail/?view=cm&to=infandeol@gmail.com" target="_blank" rel="noopener" class="nav-cta">Hire Me →</a>
   </div>
 </nav>
@@ -738,11 +742,11 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
 
         <div class="thumb"
-             data-image="images/bombtag-04.jpg"
+             data-image="images/bombtag-04.png"
              data-type="Screenshot"
              data-title="BOMBTAG DEDICATED SERVER"
              style="background:linear-gradient(135deg,#08100E,#080814);">
-          <img src="images/bombtag-04.jpg" alt="Bombtag dedicated server screenshot" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.7;">
+          <img src="images/bombtag-04.png" alt="Bombtag dedicated server screenshot" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.7;">
           <div class="thumb-icon">📸</div>
           <div class="thumb-type">Screenshot</div>
           <div class="thumb-label">SERVER</div>
